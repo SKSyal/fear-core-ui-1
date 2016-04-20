@@ -1,0 +1,103 @@
+.colour-picker {
+  list-style: none;
+  padding: 0;
+
+  &--single, &--none {
+    display: none;
+  }
+}
+
+.colour-picker__swatch {
+  @include rem(height, 40px);
+  @include rem(width, 40px);
+  @include rem(margin, 0 8px 8px 0);
+  position: relative;
+  float: left;
+  cursor: pointer;
+  display: inline-block;
+  border: solid 1px $color__brand--light-grey;
+
+  &:hover {
+    border-width: 2px;
+  }
+
+  &.is-active {
+    padding: 1px;
+    border: solid 2px $color__brand--dark-grey;
+  }
+
+  .colour-picker__swatch-selector {
+    position: absolute;
+    opacity: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    pointer-events: none;
+
+    //stop image highlight on drag
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+
+  .oos-cross__bg-color {
+    background: $color__brand--off-white;
+    opacity: .4;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+  }
+
+  .oos-cross__item {
+    color: $color__brand--light-grey;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 20;
+
+    background: linear-gradient(to top left,
+           $box-line-off-color 0%,
+           $box-line-off-color calc(50% - 1px),
+           $box-line-on-color 49%,
+           $box-line-shade-color 51%,
+           $box-line-off-color calc(50% + 1px),
+           $box-line-off-color 100%),
+       linear-gradient(to top right,
+           $box-line-off-color 0%,
+           $box-line-off-color calc(50% - 1px),
+           $box-line-on-color 49%,
+           $box-line-shade-color 51%,
+           $box-line-off-color calc(50% + 1px),
+           $box-line-off-color 100%);
+  }
+}
+
+.color-oos-msg {
+  font-family: $font__helvetica--light;
+  line-height: 10px;
+}
+
+.color-oos-msg > span {
+  color: $color__brand--red;
+}
+
+.colour-picker__colours {
+  overflow: hidden;
+}
+
+.colour-picker__inner {
+  @extend %clearfix;
+}
+
+.no-js .colour-picker__swatch-selector:checked + img {
+  @extend .colour-picker__swatch.is-active;
+}
